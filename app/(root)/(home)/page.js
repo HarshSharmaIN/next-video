@@ -1,12 +1,21 @@
+import { useState, useEffect } from "react";
 import MeetingTypeList from "@/components/MeetingTypeList";
 
 function Home() {
-  const now = new Date();
-  const time = now.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-  const date = (new Intl.DateTimeFormat("en-IN", { dateStyle: "full" })).format(now);
+  const [time, setTime] = useState("");
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    const now = new Date();
+    const formattedTime = now.toLocaleTimeString("en-IN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    const formattedDate = new Intl.DateTimeFormat("en-IN", { dateStyle: "full" }).format(now);
+    
+    setTime(formattedTime);
+    setDate(formattedDate);
+  }, []);
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
